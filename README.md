@@ -15,3 +15,11 @@ You should install the following tools locally to simplify the service developme
 - `lefthook`: a tool to manage git hooks, https://github.com/evilmartians/lefthook?tab=readme-ov-file#install
 
 You should run `lefthook` install after fetching the repository for the first time: it will configure the required git hooks.
+
+## Testing
+
+To execute unit tests run
+
+```bash
+make test
+```

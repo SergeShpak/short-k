@@ -1,3 +1,12 @@
+.PHONY: test
+test:
+	go test -v -coverpkg=./... -coverprofile=profile.cov ./... && \
+	go tool cover -func profile.cov
+
+.PHONY: test-clean
+test-clean:
+	rm -f profile.cov
+
 GOLANGCI_LINT_CACHE?=/tmp/shortik-golangci-lint-cache
 
 .PHONY: golangci-lint-run
@@ -22,3 +31,6 @@ _golangci-lint-run: _golangci-lint-reports-mkdir
 .PHONY: golangci-lint-clean
 golangci-lint-clean:
 	rm -rf ./.golangci-lint
+
+.PHONY: clean
+clean: test-clean golangci-lint-clean
