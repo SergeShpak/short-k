@@ -1,0 +1,9 @@
+pre-commit:
+  scripts:
+    "go-mod-tidy.sh":
+      runner: bash
+      priority: 1
+pre-push:
+  scripts:
+    "golangci-lint.sh":
+      runner: bash
