@@ -1,3 +1,10 @@
+.PHONY: all
+all: ;
+
+.PHONY: build
+build:
+	go build -o cmd/shortik/shortik ./cmd/shortik
+
 .PHONY: test
 test:
 	go test -v -coverpkg=./... -coverprofile=profile.cov ./... && \
@@ -26,6 +33,7 @@ _golangci-lint-run: _golangci-lint-reports-mkdir
         golangci-lint run \
             --config .golangci.yml \
 			--out-format line-number \
+			--fix \
 	> ./.golangci-lint/report
 
 .PHONY: golangci-lint-clean

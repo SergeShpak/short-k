@@ -1,0 +1,18 @@
+app:
+  # slugsAlphabet: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+  # slugsMinLen: 6
+  # slugsMaxLen: 20
+  # slugsBatchCount: 5
+http:
+  host: :8080
+  # readTimeout: 5s
+  # readHeaderTimeout: 1s
+  # writeTimeout: 30s
+  # idleTimeout: 120s
+handler:
+  baseAddr: http://localhost:8080/v1/
+  # maxRequestBodySize: 8000
+run:
+  # httpServerShutdownTimeout: 30s
+  # dbCloseTimeout: 30s
+  # shutdownTimeout: 60s

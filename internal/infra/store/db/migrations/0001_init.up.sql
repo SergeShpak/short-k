@@ -1,0 +1,15 @@
+BEGIN TRANSACTION;
+
+CREATE DOMAIN url as VARCHAR (8000);
+CREATE DOMAIN slug as VARCHAR (100);
+
+CREATE TABLE urls(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    url url NOT NULL,
+    slug slug NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    CONSTRAINT unique_url UNIQUE (url),
+    CONSTRAINT unique_slug UNIQUE (slug)
+);
+
+COMMIT;

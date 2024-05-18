@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Shortik API - Version 1
+  version: "0.1"
+servers:
+  - url: http://localhost:8080/v1
+    description: Locally deployed server
+paths:
+  /:
+    post:
+      summary: Shortens a provided link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  shortened_url:
+                    type: string
+        '400':
+          description: The request is invalid
+        default:
+          description: Unexpected error
+  /{slug}:
+    get:
+      summary: Gets a full link from a shortened ones
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: Slug used in the shortened URL
+          schema:
+            type: string
+      responses:
+        '307':
+          description: Redirection to the original URL
+        '404':
+          description: URL associated with the provided slug not found
+        default:
+          description: Unexpected error

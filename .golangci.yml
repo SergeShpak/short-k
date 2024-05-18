@@ -196,7 +196,6 @@ linters-settings:
       - condition
       - operation
       - return
-      - assign
     ignored-files: []
     ignored-functions: []
     ignored-numbers: []

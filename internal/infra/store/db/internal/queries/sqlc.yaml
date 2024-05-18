@@ -1,0 +1,17 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "queries.sql"
+    schema: "../../migrations"
+    gen:
+      go:
+        package: queries
+        out: "."
+        sql_package: "pgx/v5"
+        overrides:
+          - db_type: "url"
+            go_type:
+              type: string
+          - db_type: slug
+            go_type:
+              type: string
