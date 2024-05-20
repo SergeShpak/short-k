@@ -1,0 +1,5 @@
+.golangci-lint/
+.vscode/
+profile.cov
+
+cmd/shortik/shortik

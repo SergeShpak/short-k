@@ -1,0 +1,47 @@
+services:
+  shortik:
+    container_name: app
+    build:
+      context: .
+      dockerfile: shortik.Dockerfile
+    environment:
+      - SHORTIK_DSN=${SHORTIK_DSN}
+    volumes:
+      - type: bind
+        source: config.yaml
+        target: /shortik/config.yaml
+    command:
+      /shortik/shortik -config /shortik/config.yaml -dsn $SHORTIK_DSN
+    ports:
+      - "8080:8080"
+    depends_on:
+      shortik-db:
+        condition: service_healthy
+    links:
+      - "shortik-db"
+
+  shortik-db:
+    container_name: shortik-db
+    image: postgres:16.3
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=P@ssw0rd
+    volumes:
+      - type: bind
+        source: db/init
+        target: /docker-entrypoint-initdb.d
+      - type: bind
+        source: ${DB_PATH:-/tmp/shortik-data}
+        target: /var/lib/postgresql/data
+        bind:
+          create_host_path: true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  shortik:
+    driver: bridge
